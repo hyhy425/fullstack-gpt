@@ -1,0 +1,24 @@
+# Research Report on XZ Utils Backdoor
+
+## Introduction
+In February 2024, a significant security incident occurred involving the XZ Utils, a widely used data compression utility in Linux. A malicious backdoor was introduced in versions 5.6.0 and 5.6.1 of the xz utility, which is part of the liblzma library. This backdoor was discovered by software developer Andres Freund and has been assigned the CVE identifier CVE-2024-3094, with a CVSS score of 10.0, indicating a critical vulnerability.
+
+## Background
+The backdoor was introduced by an individual using the name "Jia Tan". The malicious code allows an attacker who possesses a specific Ed448 private key to execute remote code on affected Linux systems via OpenSSH. The backdoor was discovered while Freund was investigating performance issues in Debian Sid, where he noticed unusual CPU usage and errors in memory debugging tools.
+
+The investigation revealed that the insertion of the backdoor was the result of a three-year effort by Jia Tan to gain trust within the XZ Utils project. This involved using multiple pseudonyms and sock puppetry to manipulate the project's leadership.
+
+## Mechanism
+The backdoor remains dormant unless a specific third-party patch of the SSH server is applied. It consists of two compressed test files containing malicious binary code. The exploit modifies the behavior of OpenSSH's SSH server daemon, allowing unauthorized access to the system. The malicious code uses the glibc IFUNC mechanism to replace a function in OpenSSH with a compromised version.
+
+## Response
+Upon discovery, the US Cybersecurity and Infrastructure Security Agency (CISA) issued a security advisory recommending that affected systems revert to earlier, uncompromised versions of the software. Major Linux distributions, including Red Hat and Debian, took immediate action to mitigate the threat by reverting to safe versions of the affected packages.
+
+The incident raised concerns about the security of open-source software, particularly regarding the reliance on unpaid volunteers for critical infrastructure. Experts noted that had the backdoor gone undetected, it could have provided extensive unauthorized access to numerous systems worldwide.
+
+## Conclusion
+The XZ Utils backdoor incident highlights the vulnerabilities present in open-source software development and the potential for sophisticated attacks. It serves as a reminder of the importance of vigilance and security practices in software maintenance and development.
+
+## References
+- Wikipedia: XZ Utils backdoor
+- Various news articles and security advisories regarding CVE-2024-3094.
